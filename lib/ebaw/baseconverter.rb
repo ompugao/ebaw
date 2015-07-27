@@ -11,12 +11,14 @@ module Ebaw
       self
     end
       
-    def bind_param(param_key, piped_param_key)
-      @_binded_params[param_key.to_sym] = piped_param_key.to_sym
+    def bind_param(**kwargs)
+      kwargs.each_pair do |piped_param_key, param_key|
+        @_binded_params[param_key.to_sym] = piped_param_key.to_sym
+      end
     end
 
-    def transfer_param(param_key)
-      @_transfered_params += [param_key.to_sym]
+    def transfer_param(*param_keys)
+      @_transfered_params += param_keys.map(&:to_sym)
     end
 
     def enter(piped_params,&block)
