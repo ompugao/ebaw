@@ -1,7 +1,7 @@
-require 'ebaw/exception'
-require 'ebaw/baseconverter'
+require 'magicshelf/exception'
+require 'magicshelf/baseconverter'
 
-module Ebaw
+module MagicShelf
   class DirStructureFlattenerError < Error; end
 
   class DirStructureFlattener < BaseConverter

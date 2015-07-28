@@ -1,9 +1,9 @@
-require 'ebaw/exception'
-require 'ebaw/baseconverter'
+require 'magicshelf/exception'
+require 'magicshelf/baseconverter'
 require 'gepub'
 require 'shellwords'
 
-module Ebaw
+module MagicShelf
   class EpubGeneratorError < Error; end
 
   # create a epub file with the file under the current directory
@@ -11,10 +11,10 @@ module Ebaw
     attr_accessor :book_type, :title, :outputfile, :language, :identifier_url, :creator, :creator_en
 
     def enter(piped_params,&block)
-      Ebaw.logger.debug('enter EpubGenerator')
+      MagicShelf.logger.debug('enter EpubGenerator')
       # check parameters
-      raise Ebaw::EpubGeneratorError.new("@title is not set") if @title == nil
-      raise Ebaw::EpubGeneratorError.new("@outputfile is not set") if @outputfile == nil
+      raise MagicShelf::EpubGeneratorError.new("@title is not set") if @title == nil
+      raise MagicShelf::EpubGeneratorError.new("@outputfile is not set") if @outputfile == nil
       # default parameters
       @book_type      ||= 'comic'
       @language       ||= 'ja'

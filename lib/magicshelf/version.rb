@@ -1,3 +1,3 @@
-module Ebaw
+module MagicShelf
   VERSION = "0.1.0"
 end

@@ -1,13 +1,13 @@
-require 'ebaw/baseconverter'
+require 'magicshelf/baseconverter'
 
-module Ebaw
+module MagicShelf
   class FileCleanerError < Error; end
 
   class FileCleaner < BaseConverter
     attr_accessor :file
 
     def enter(piped_params,&block)
-      #raise Ebaw::FileCleanerError.new("workdir is not set") if @workdir == nil
+      #raise MagicShelf::FileCleanerError.new("workdir is not set") if @workdir == nil
       super
     end
 

@@ -1,16 +1,16 @@
-require 'ebaw/baseconverter'
+require 'magicshelf/baseconverter'
 
-module Ebaw
+module MagicShelf
   class DirChangerError < Error; end
 
   class DirChanger < BaseConverter
     attr_accessor :workdir
 
     def enter(piped_params,&block)
-      raise Ebaw::DirChangerError.new("workdir is not set") if @workdir == nil
+      raise MagicShelf::DirChangerError.new("workdir is not set") if @workdir == nil
       ret = nil
       Dir.chdir(@workdir) {|dir|
-        Ebaw.logger.debug("DirChanger: chdir to #{dir}")
+        MagicShelf.logger.debug("DirChanger: chdir to #{dir}")
         ret = super
       }
       ret

@@ -1,6 +1,6 @@
-require 'ebaw/exception'
+require 'magicshelf/exception'
 
-module Ebaw
+module MagicShelf
   class BaseConverter
     attr_accessor :next_converter
     
@@ -22,12 +22,12 @@ module Ebaw
     end
 
     def enter(piped_params,&block)
-      #raise Ebaw::Error.new("function enter is not defined.\n if you do not want to do anything, just call 'yield'")
+      #raise MagicShelf::Error.new("function enter is not defined.\n if you do not want to do anything, just call 'yield'")
       block.call(piped_params)
     end
 
     def process(entered_params)
-      #raise Ebaw::Error.new("function execute is not defined")
+      #raise MagicShelf::Error.new("function execute is not defined")
       return entered_params
     end
 

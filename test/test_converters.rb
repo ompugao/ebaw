@@ -1,12 +1,12 @@
 require 'test/unit'
-require 'ebaw'
+require 'magicshelf'
 require 'tmpdir'
 
 class TestFileMover < Test::Unit::TestCase
   class << self
     # テスト群の実行前に呼ばれる．変な初期化トリックがいらなくなる
     def startup
-      @@tempdir = Dir.mktmpdir("ebaw_testsandbox")
+      @@tempdir = Dir.mktmpdir("magicshelf_testsandbox")
       @@inputfile = File.join(@@tempdir,'test_inputfile')
       File.open(@@inputfile,'w')
       @@outputfile = File.join(@@tempdir,'test_outputfile')
@@ -31,7 +31,7 @@ class TestFileMover < Test::Unit::TestCase
   end
 
   def test_filemover
-    filemover = Ebaw::FileMover.new do |this|
+    filemover = MagicShelf::FileMover.new do |this|
       this.inputfile = @@inputfile
       this.outputfile = @@outputfile
       this.transfer_param(:outputfile)
