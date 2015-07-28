@@ -25,7 +25,7 @@ module Ebaw
     def process(entered_params)
       out, err, status = Open3.capture3("kindlegen #{@inputfile} -o #{@outputfile}")
       if status.exitstatus != 0
-        raise Ebaw::KindleGenWrapperError.new("kindlegen did not exit with 0: \n" + out + "\n" + err)
+        raise Ebaw::KindleGenWrapperError.new("kindlegen exited with #{status.exitstatus}: \n" + out + "\n" + err)
       end
 
       super

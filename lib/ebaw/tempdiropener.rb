@@ -8,7 +8,7 @@ module Ebaw
   class TempDirOpener < BaseConverter
     def enter(params,&block)
       Dir.mktmpdir("ebaw_tempdir") {|dir|
-        params[:workdir] = dir
+        @workdir = dir
         super
       }
     end

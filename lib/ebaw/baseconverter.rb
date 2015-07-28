@@ -40,6 +40,8 @@ module Ebaw
       self
     end
 
+    alias :| :pipe
+
     def execute(piped_params = {})
       ret = nil
 

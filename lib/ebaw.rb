@@ -5,10 +5,11 @@ require "ebaw/dirchanger"
 require "ebaw/epubgenerator"
 require "ebaw/filecleaner"
 require "ebaw/filemover"
+require "ebaw/dirstructureflattener"
 require "ebaw/kindlegenwrapper"
 require "ebaw/kindlestripper"
 require "ebaw/tempdiropener"
-require "ebaw/zipextractor"
+require "ebaw/fileextractor"
 
 require 'logger'
 
