@@ -2,6 +2,7 @@ require 'magicshelf/baseconverter'
 require 'filemagic'
 require 'zip'
 require 'open3'
+require 'shellwords'
 
 module MagicShelf
   class FileExtractorError < Error; end
@@ -33,7 +34,10 @@ module MagicShelf
           raise MagicShelf::FileExtractorError.new("cannot execute unrar, is it on your PATH?")
         end
         
-        out, err, status = Open3.capture3("unrar x #{@inputfile} #{@destdir}")
+        out, err, status = Open3.capture3("unrar x #{Shellwords.escape(@inputfile)} #{Shellwords.escape(@destdir)}")
+        if status.exitstatus != 0
+          raise MagicShelf::FileExtractorError.new("unrar exits with status #{status.exitstatus}: \n #{out} \n #{err}")
+        end
       else
         raise MagicShelf::FileExtractorError.new("no way to extract file for the file with filetype: #{params[:mimetype]}")
       end
