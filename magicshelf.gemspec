@@ -28,4 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "resque"
   spec.add_dependency "ruby-filemagic"
   spec.add_dependency "rubyzip"
+  spec.add_dependency "sinatra-contrib"
 end

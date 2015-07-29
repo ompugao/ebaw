@@ -10,6 +10,7 @@ require "magicshelf/kindlegenwrapper"
 require "magicshelf/kindlestripper"
 require "magicshelf/tempdiropener"
 require "magicshelf/fileextractor"
+require "magicshelf/fileserver"
 
 require 'logger'
 
