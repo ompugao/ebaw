@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="/css/pure-min.css">
+  <link rel="stylesheet" type="text/css" href="/css/index.css">
+  <title><%= page_title %></title>
+</head>
+<body>
+  <div id="page-title"><h2><%= page_title %></h2></div>
+  <div class="sortby-selection-menu pure-menu pure-menu-horizontal">
+    <ul class="pure-menu-list">
+      <li class="pure-menu-item"><a href="/files/?sort_by=title"         class="pure-menu-link">Title</a></li>
+      <li class="pure-menu-item"><a href="/files/?sort_by=title_reverse" class="pure-menu-link">Title(reverse)</a></li>
+      <li class="pure-menu-item"><a href="/files/?sort_by=date"          class="pure-menu-link">Date</a></li>
+      <li class="pure-menu-item"><a href="/files/?sort_by=date_reverse"  class="pure-menu-link">Date(reverse)</a></li>
+    </ul>
+  </div>
+  <table id="file_list" class="pure-table">
+    <thead>
+      <tr>
+        <td>File/Directory</td>
+        <td>Button</td>
+        <td>Last Modified</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% files_withmtime.each_with_index do |f_mtime,index| %>
+        <% f, mtime = f_mtime %>
+        <!--<tr class='<%= "pure-table-odd" if index%2==0 %>' >-->
+        <tr>
+          <% if File.file? f %>
+            <td class="file"><%= "<a href='/files/#{f}'>#{File.basename(f)}</a>" %></td>
+          <% else %>
+            <td class="mtime"><%= "<a href='/files/#{f}'>#{f}/</a>" %></td>
+          <% end %>
+          <td class='buttons'>
+            <a class="file-button pure-button" href="#">Raw</a>
+            <a class="file-button pure-button" href="#">Mobi</a>
+          </td>
+          <td><%= mtime %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+</body>
+</html>
+

@@ -1,0 +1,29 @@
+div#page-title{
+  text-align: center;
+}
+div.sortby-selection-menu {
+  background-color: #000;
+}
+.pure-menu-link{
+  color: #eee;
+}
+
+table#file_list {
+  width: 100%;
+}
+.pure-table td, .pure-table th{
+  padding: .1em .1em .4em;
+}
+
+td#file {
+  width: 50%;
+}
+td#buttons {
+  width: 20%;
+}
+td#mtime {
+  width: 30%;
+}
+a.file-button {
+  padding: .2em .3em;
+}

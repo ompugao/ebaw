@@ -1,0 +1,8 @@
+#!/usr/bin/env ruby
+require 'sinatra'
+require 'magicshelf'
+
+run MagicShelf::FileServer
+
+
+# vim: set ft=ruby:
