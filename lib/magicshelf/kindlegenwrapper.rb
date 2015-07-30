@@ -1,14 +1,13 @@
 require 'magicshelf/exception'
-require 'magicshelf/baseconverter'
 require 'open3'
 
 module MagicShelf
   class KindleGenWrapperError < Error; end
 
-  class KindleGenWrapper < BaseConverter
+  class KindleGenWrapper
     attr_accessor :inputfile, :outputfile
 
-    def enter(piped_params,&block)
+    def enter()
       MagicShelf.logger.debug('enter KindleGenWrapper')
 
       # check parameters
@@ -19,16 +18,14 @@ module MagicShelf
         raise MagicShelf::KindleGenWrapperError.new("cannot execute kindlegen, is it on your PATH?")
       end
 
-      super
+      yield
     end
 
-    def process(entered_params)
+    def process()
       out, err, status = Open3.capture3("kindlegen #{@inputfile} -o #{@outputfile}")
       if status.exitstatus != 0
         raise MagicShelf::KindleGenWrapperError.new("kindlegen exited with #{status.exitstatus}: \n" + out + "\n" + err)
       end
-
-      super
     end
 
   end

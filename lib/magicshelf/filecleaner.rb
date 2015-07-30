@@ -1,19 +1,18 @@
-require 'magicshelf/baseconverter'
+require 'magicshelf/exception'
 
 module MagicShelf
   class FileCleanerError < Error; end
 
-  class FileCleaner < BaseConverter
+  class FileCleaner
     attr_accessor :file
 
-    def enter(piped_params,&block)
+    def enter()
       #raise MagicShelf::FileCleanerError.new("workdir is not set") if @workdir == nil
-      super
+      yield
     end
 
-    def process(piped_params)
+    def process()
       FileUtils.remove_file(@file)
-      super
     end
   end
 end

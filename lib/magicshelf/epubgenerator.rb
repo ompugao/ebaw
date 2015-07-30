@@ -1,5 +1,4 @@
 require 'magicshelf/exception'
-require 'magicshelf/baseconverter'
 require 'gepub'
 require 'shellwords'
 
@@ -7,10 +6,10 @@ module MagicShelf
   class EpubGeneratorError < Error; end
 
   # create a epub file with the file under the current directory
-  class EpubGenerator < BaseConverter
+  class EpubGenerator
     attr_accessor :book_type, :title, :outputfile, :language, :identifier_url, :creator, :creator_en
 
-    def enter(piped_params,&block)
+    def enter()
       MagicShelf.logger.debug('enter EpubGenerator')
       # check parameters
       raise MagicShelf::EpubGeneratorError.new("@title is not set") if @title == nil
@@ -20,10 +19,10 @@ module MagicShelf
       @language       ||= 'ja'
       @identifier_url ||= 'http:/example.jp/bookid_in_url'
 
-      super
+      yield
     end
 
-    def process(entered_params)
+    def process()
       epubname = @outputfile
 
       book = GEPUB::Book.new
@@ -68,8 +67,6 @@ module MagicShelf
       }
 
       book.generate_epub(epubname)
-
-      super
     end
 
   end

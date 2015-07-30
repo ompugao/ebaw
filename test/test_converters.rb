@@ -34,12 +34,10 @@ class TestFileMover < Test::Unit::TestCase
     filemover = MagicShelf::FileMover.new do |this|
       this.inputfile = @@inputfile
       this.outputfile = @@outputfile
-      this.transfer_param(:outputfile)
     end
     outparams = filemover.execute()
     assert_true(!File.exist?(@@inputfile))
     assert_true(File.exist?(@@outputfile))
-    assert_equal(@@outputfile, outparams[:outputfile])
   end
 
 end

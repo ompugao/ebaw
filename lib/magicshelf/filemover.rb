@@ -1,4 +1,3 @@
-require 'magicshelf/baseconverter'
 require 'magicshelf/exception'
 require 'gepub'
 require 'shellwords'
@@ -6,20 +5,19 @@ require 'shellwords'
 module MagicShelf
   class FileMoverError < Error; end
 
-  class FileMover < BaseConverter
+  class FileMover
     attr_accessor :inputfile, :outputfile
 
-    def enter(params, &block)
+    def enter()
       MagicShelf.logger.debug('enter FileMover')
       raise MagicShelf::FileMoverError.new("inputfile is not set") if @inputfile == nil
       raise MagicShelf::FileMoverError.new("outputfile is not set") if @outputfile == nil
 
-      super
+      yield
     end
 
-    def process(piped_params)
+    def process()
       FileUtils.mv(@inputfile, @outputfile)
-      super
     end
   end
 end

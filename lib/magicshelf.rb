@@ -3,6 +3,7 @@ require "magicshelf/version"
 
 require "magicshelf/dirchanger"
 require "magicshelf/epubgenerator"
+require "magicshelf/executionpipe"
 require "magicshelf/filecleaner"
 require "magicshelf/filemover"
 require "magicshelf/dirstructureflattener"

@@ -1,26 +1,26 @@
-require 'magicshelf/baseconverter'
 require 'filemagic'
 require 'zip'
 require 'open3'
 require 'shellwords'
+require 'magicshelf/exception'
 
 module MagicShelf
   class FileExtractorError < Error; end
 
-  class FileExtractor < BaseConverter
+  class FileExtractor
     attr_accessor :inputfile, :destdir
 
-    def enter(params,&block)
+    def enter()
       raise MagicShelf::FileExtractorError.new("inputfile is not set") if @inputfile == nil
       mimetype = FileMagic.new(FileMagic::MAGIC_MIME_TYPE).file(@inputfile)
       raise MagicShelf::FileExtractorError.new("unsupported filetype: #{mimetype}") if not %w{application/x-rar application/zip}.include?(mimetype)
-      params[:mimetype] = mimetype
+      @mimetype = mimetype
       
-      super
+      yield
     end
 
-    def process(params)
-      case params[:mimetype]
+    def process()
+      case @mimetype
       when "application/zip"
         Zip::File.open(@inputfile) do |zip_file|
           zip_file.each do |entry|
@@ -39,11 +39,9 @@ module MagicShelf
           raise MagicShelf::FileExtractorError.new("unrar exits with status #{status.exitstatus}: \n #{out} \n #{err}")
         end
       else
-        raise MagicShelf::FileExtractorError.new("no way to extract file for the file with filetype: #{params[:mimetype]}")
+        raise MagicShelf::FileExtractorError.new("no way to extract file for the file with filetype: #{@mimetype}")
       end
 
-      params.delete :mimetype
-      super
     end
 
   end

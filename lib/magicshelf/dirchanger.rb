@@ -1,20 +1,22 @@
-require 'magicshelf/baseconverter'
+require 'magicshelf/exception'
 
 module MagicShelf
   class DirChangerError < Error; end
 
-  class DirChanger < BaseConverter
+  class DirChanger
     attr_accessor :workdir
 
-    def enter(piped_params,&block)
+    def enter()
       raise MagicShelf::DirChangerError.new("workdir is not set") if @workdir == nil
-      ret = nil
       Dir.chdir(@workdir) {|dir|
         MagicShelf.logger.debug("DirChanger: chdir to #{dir}")
-        ret = super
+        yield
       }
-      ret
     end
+
+    def process()
+    end
+
   end
 end
 
