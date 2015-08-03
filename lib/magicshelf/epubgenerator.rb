@@ -53,6 +53,13 @@ module MagicShelf
         metafixedlayout = metadata.add_metadata('meta', '')
         metafixedlayout['name'] = 'fixed-layout'
         metafixedlayout['content'] = 'true'
+      elsif @book_type == "novelimage"
+        metadata = book.instance_eval{@package}.instance_eval{@metadata}
+        metafixedlayout = metadata.add_metadata('meta', '')
+        metafixedlayout['name'] = 'fixed-layout'
+        metafixedlayout['content'] = 'true'
+      elsif @book_type == "novel"
+        #nothing to do
       end
       
       # within ordered block, add_item will be added to spine.

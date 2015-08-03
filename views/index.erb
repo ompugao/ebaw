@@ -25,20 +25,18 @@
       </tr>
     </thead>
     <tbody>
-      <% files_withmtime.each_with_index do |f_mtime,index| %>
-        <% f, mtime = f_mtime %>
-        <!--<tr class='<%= "pure-table-odd" if index%2==0 %>' >-->
+      <% files_withmtime.each_with_index do |(f, mtime),index| %>
         <tr>
           <% if File.file? f %>
             <td class="file"><%= "<a href='/files/#{f}'>#{File.basename(f)}</a>" %></td>
           <% else %>
-            <td class="mtime"><%= "<a href='/files/#{f}'>#{f}/</a>" %></td>
+            <td class="directory"><%= "<a href='/files/#{f}'>#{f}/</a>" %></td>
           <% end %>
           <td class='buttons'>
             <a class="file-button pure-button" href="#">Raw</a>
             <a class="file-button pure-button" href="#">Mobi</a>
           </td>
-          <td><%= mtime %></td>
+          <td class="mtime"><%= mtime %></td>
         </tr>
       <% end %>
     </tbody>

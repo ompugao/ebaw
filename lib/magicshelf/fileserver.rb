@@ -7,8 +7,7 @@ module MagicShelf
   class FileServer < Sinatra::Application
     register Sinatra::ConfigFile
     configure :development do
-      enable :reloader
-      set :bind, '0.0.0.0'
+      register Sinatra::Reloader
     end
 
     set :root, File.join(File.dirname(__FILE__), '../..') #set :views, File.join(File.dirname(__FILE__), '../..', 'views')
