@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
-gem 'gepub', github: 'skoji/gepub' # git: 'https://xxxxxx/yyyy.git'
-
 gemspec
+
+gem 'gepub', github: 'skoji/gepub' # git: 'https://xxxxxx/yyyy.git'
+gem 'naturally', github: 'zedalaye/naturally'
