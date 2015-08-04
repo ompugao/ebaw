@@ -14,6 +14,10 @@ require "magicshelf/tempdiropener"
 require "magicshelf/fileextractor"
 require "magicshelf/fileserver"
 
+Dir.glob('monkeypatches/*') do |f|
+  require f
+end
+
 require 'logger'
 
 module MagicShelf
