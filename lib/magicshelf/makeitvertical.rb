@@ -22,9 +22,10 @@ module MagicShelf
         rescue Magick::ImageMagickError, RuntimeError => ex
           MagicShelf.logger.info("#{f} is not an image file. skipped.")
         end
+        next if img.nil?
         if img.columns > img.rows
           img.rotate!(90)
-          newfile = File.join(File.dirname(f), File.basename(f,'.*') + '_rotate' + File.extname(f))
+          newfile = File.join(File.dirname(f), File.basename(f,'.*') + '-rotate' + File.extname(f))
           img.write(newfile)
           MagicShelf.logger.info("#{f} is rotated and saved to #{newfile}.")
           if @erase_original
