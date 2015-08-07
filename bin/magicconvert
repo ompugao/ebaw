@@ -18,6 +18,8 @@ MagicShelf::ExecutionPipe.new.enter { |params,&block|
     block.call
   end
 }.pipe(MagicShelf::DirRenamer.new, :workdir => [:workdir]) { |this|
+}.pipe(MagicShelf::FileNameValidator.new, :workdir => [:workdir]) { |this|
+}.pipe(MagicShelf::MakeItVertical.new, :workdir => [:workdir]) { |this|
 }.pipe(MagicShelf::EpubGenerator.new, :workdir => [:workdir]) { |this|
   this.title      = optparams['title']
   this.book_type  = 'comic'

@@ -2,17 +2,20 @@ require 'rubygems'
 require "magicshelf/version"
 
 require "magicshelf/dirchanger"
+require "magicshelf/dirrenamer"
+require "magicshelf/dirstructureflattener"
 require "magicshelf/epubgenerator"
 require "magicshelf/executionpipe"
 require "magicshelf/filecleaner"
+require "magicshelf/fileextractor"
 require "magicshelf/filemover"
-require "magicshelf/dirstructureflattener"
-require "magicshelf/dirrenamer"
+require "magicshelf/filenamevalidator"
+require "magicshelf/fileserver"
 require "magicshelf/kindlegenwrapper"
 require "magicshelf/kindlestripper"
+require "magicshelf/makeitvertical"
 require "magicshelf/tempdiropener"
-require "magicshelf/fileextractor"
-require "magicshelf/fileserver"
+
 
 Dir.glob('monkeypatches/*') do |f|
   require f
