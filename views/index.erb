@@ -28,13 +28,13 @@
       <% files_withmtime.each_with_index do |(f, mtime),index| %>
         <tr>
           <% if File.file? f %>
-            <td class="file"><%= "<a href='/files/#{f}'>#{File.basename(f)}</a>" %></td>
+            <td class="file"><%= "<a href='/get_file/#{f}'>#{File.basename(f)}</a>" %></td>
           <% else %>
             <td class="directory"><%= "<a href='/files/#{f}'>#{f}/</a>" %></td>
           <% end %>
           <td class='buttons'>
-            <a class="file-button pure-button" href="#">Raw</a>
-            <a class="file-button pure-button" href="#">Mobi</a>
+            <%= "<a class='file-button pure-button' href='/generate_mobi/#{f}'>Gen</a>" %>
+            <%= "<a class='file-button pure-button' href='/get_file/mobi/#{f}'>Mobi</a>" %>
           </td>
           <td class="mtime"><%= mtime %></td>
         </tr>

@@ -22,7 +22,7 @@ MagicShelf::ExecutionPipe.new.enter { |params,&block|
 }.pipe(MagicShelf::MakeItVertical.new, :workdir => [:workdir]) { |this|
 }.pipe(MagicShelf::EpubGenerator.new, :workdir => [:workdir]) { |this|
   this.title      = optparams['title']
-  this.book_type  = 'comic'
+  this.book_type  = optparams['booktype']
   this.outputfile = 'test.epub'
 }.pipe(MagicShelf::KindleGenWrapper.new, :outputfile => [:inputfile]) { |this|
   this.outputfile = 'test.mobi'

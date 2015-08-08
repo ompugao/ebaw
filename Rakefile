@@ -1,5 +1,6 @@
 require "bundler/gem_tasks"
 require 'rake/testtask'
+require 'resque/tasks'
 
 desc 'Run test_unit based test'
 Rake::TestTask.new do |t|
@@ -8,4 +9,8 @@ Rake::TestTask.new do |t|
   t.libs << "test"
   t.test_files = Dir["test/**/test_*.rb"]
   t.verbose = true
+end
+
+task :'resque:setup' do
+  Dir["./lib/magicshelf/mobitask.rb"].each {|file| require file}
 end

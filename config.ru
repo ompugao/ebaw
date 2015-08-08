@@ -1,2 +1,6 @@
 require './lib/magicshelf/fileserver'
-run MagicShelf::FileServer
+require 'resque/server'
+
+run Rack::URLMap.new \
+  "/"       => MagicShelf::FileServer,
+  "/resque" => Resque::Server.new

@@ -23,6 +23,8 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "pry"
   spec.add_development_dependency "pry-doc"
   spec.add_development_dependency "pry-rescue"
+  spec.add_development_dependency "shotgun"
+  spec.add_development_dependency "foreman"
   spec.add_development_dependency "test-unit", "~> 3.1.2"
 
   spec.add_dependency "gepub"

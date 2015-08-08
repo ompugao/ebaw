@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/pure-min.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <title><%= page_title %></title>
+  </head>
+  <body>
+    <form class="pure-form pure-form-aligned" method="post">
+      <fieldset>
+        <div class="pure-control-group">
+          <label for="title">Book Title</label>
+          <input id="title" name="title" type="text" placeholder="title" required>
+        </div>
+
+        <div class="pure-control-group">
+          <label for="author">Book Author</label>
+          <input id="author" name="author" type="text" placeholder="author">
+        </div>
+
+        <div class="pure-control-group">
+          <label for="outputfile">Output Filename (optional)</label>
+          <input id="outputfile" name="outputfile" type="text" placeholder="filename.mobi" value="">
+        </div>
+
+        <div class="pure-control-group">
+          <label for="booktype">Book Type</label>
+          <form class="pure-form">
+            <label for="booktype-comic" class="pure-radio">
+              <input id="booktype-comic" type="radio" name="booktype" value="comic" checked>
+              comic
+            </label>
+
+            <label for="booktype-novel" class="pure-radio">
+              <input id="booktype-novel" type="radio" name="booktype" value="novel">
+              novel
+            </label>
+
+            <label for="booktype-novelimage" class="pure-radio">
+              <input id="booktype-novelimage" type="radio" name="booktype" value="novelimage">
+              novelimage
+            </label>
+          </form>
+        </div>
+
+        <div class="pure-controls">
+          <button type="submit" class="pure-button pure-button-primary">Generate Mobi</button>
+        </div>
+      </fieldset>
+    </form>
+  </body>
+</html>
