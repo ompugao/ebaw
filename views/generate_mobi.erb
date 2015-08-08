@@ -10,6 +10,10 @@
     <form class="pure-form pure-form-aligned" method="post">
       <fieldset>
         <div class="pure-control-group">
+          <label for="inputfile">Input File</label>
+          <input id="inputfile" type="text" placeholder='<%= path %>' readonly>
+        </div>
+        <div class="pure-control-group">
           <label for="title">Book Title</label>
           <input id="title" name="title" type="text" placeholder="title" required>
         </div>
@@ -40,6 +44,11 @@
             <label for="booktype-novelimage" class="pure-radio">
               <input id="booktype-novelimage" type="radio" name="booktype" value="novelimage">
               novelimage
+            </label>
+
+            <label for="booktype-ltr" class="pure-radio">
+              <input id="booktype-ltr" type="radio" name="booktype" value="ltr">
+              ltr
             </label>
           </form>
         </div>

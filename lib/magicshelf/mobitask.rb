@@ -12,7 +12,7 @@ module MagicShelf
     # Params:
     # +inputfile+:: must be fullpath to the input file
     # +title+:: book title
-    # +booktype+:: book type: must be one of ["comic", "novelimage", "novel"]
+    # +booktype+:: book type: must be one of ["comic", "novelimage", "novel", "ltr"]
     # +outputfile+:: must be fullpath to the output file
     def self.perform(params)
       inputfile = params['inputfile']
