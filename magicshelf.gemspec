@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Shohei Fujii"]
   spec.email         = ["fujii.shohei@gmail.com"]
 
-  spec.summary       = %q{}
-  spec.description   = %q{}
+  spec.summary       = %q{Access and get your e-book from kindle anywhere}
+  spec.description   = %q{zip/rar to mobi (via epub) converter and serve files from web interface}
   spec.homepage      = ""
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|sandbox|)/}) }
