@@ -40,7 +40,9 @@ module MagicShelf
           fname = (f.start_with?('./') ? f[2..-1] : f)
           [fname, File.mtime(f).strftime("%Y/%m/%d %H:%M:%S")]
         end
-        erb :index, :locals => {:page_title => settings.page_title, :files_withmtime => files_withmtime}
+        upperpath = nil
+        upperpath = path.split('/')[0...-1].join('/') if path != ""
+        erb :index, :locals => {:page_title => settings.page_title, :files_withmtime => files_withmtime, :path => path, :upperpath => upperpath, :sort_type => sort_type}
       }
     end
 
