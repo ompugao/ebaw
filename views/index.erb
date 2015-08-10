@@ -2,21 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/css/pure-min.css">
-  <link rel="stylesheet" type="text/css" href="/css/index.css">
+  <link rel="stylesheet" type="text/css" href="<%= url("/css/pure-min.css") %>">
+  <link rel="stylesheet" type="text/css" href="<%= url("/css/index.css") %>">
   <title><%= page_title %></title>
 </head>
 <body>
   <div id="page-title"><h2><%= page_title %></h2></div>
   <div class="sortby-selection-menu pure-menu pure-menu-horizontal">
     <ul class="pure-menu-list">
-      <li class="pure-menu-item"><a href="/files/<%= path %>?sort_by=title"         class="pure-menu-link">Title</a></li>
-      <li class="pure-menu-item"><a href="/files/<%= path %>?sort_by=title_reverse" class="pure-menu-link">Title(reverse)</a></li>
-      <li class="pure-menu-item"><a href="/files/<%= path %>?sort_by=date"          class="pure-menu-link">Date</a></li>
-      <li class="pure-menu-item"><a href="/files/<%= path %>?sort_by=date_reverse"  class="pure-menu-link">Date(reverse)</a></li>
+      <li class="pure-menu-item"><a href="<%= url("/files/" + path) %>?sort_by=title"         class="pure-menu-link">Title</a></li>
+      <li class="pure-menu-item"><a href="<%= url("/files/" + path) %>?sort_by=title_reverse" class="pure-menu-link">Title(reverse)</a></li>
+      <li class="pure-menu-item"><a href="<%= url("/files/" + path) %>?sort_by=date"          class="pure-menu-link">Date</a></li>
+      <li class="pure-menu-item"><a href="<%= url("/files/" + path) %>?sort_by=date_reverse"  class="pure-menu-link">Date(reverse)</a></li>
       <% if upperpath %>
         <li class="pure-menu-item">
-          <%= '<a href="/files/' + upperpath + '?sort_by=' + sort_type + '" class="pure-menu-link">../</a>' %>
+        <a href="<%= url("/files/%s?sort_by=%s" % [upperpath, sort_type])%>" class="pure-menu-link">../</a>
         </li>
       <% end %>
     </ul>
@@ -33,12 +33,18 @@
       <% files_withmtime.each_with_index do |(f, mtime),index| %>
         <tr>
           <% if File.file? f %>
-            <td class="file"><%= "<a href='/get_file/#{f}'>#{File.basename(f)}</a>" %></td>
+            <td class="file">
+              <a href="<%= url('/get_file/' + f)%>">
+                <%= File.basename(f)%>
+              </a>
+            </td>
           <% else %>
-            <td class="directory"><%= "<a href='/files/#{f}?sort_by=#{sort_type}'>#{f}/</a>" %></td>
+            <td class="directory">
+              <a href="<%= url("/files/%s?sort_by=%s" % [f, sort_type]) %>"><%= f + "/" %></a>
+            </td>
           <% end %>
           <td class='buttons'>
-            <%= "<a class='file-button pure-button' href='/generate_mobi/#{f}'>Generate</a>" %>
+            <a class='file-button pure-button' href='<%= url("/generate_mobi/#{f}") %>'>Generate</a>
           </td>
           <td class="mtime"><%= mtime %></td>
         </tr>

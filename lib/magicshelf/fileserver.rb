@@ -17,7 +17,7 @@ module MagicShelf
     config_file 'server_config.yml'
 
     get '/' do
-      redirect "/files/", 303
+      redirect to("/files/"), 303
     end
 
     get '/files/*' do |path|
