@@ -17,7 +17,7 @@ module MagicShelf
     config_file 'server_config.yml'
 
     get '/' do
-      redirect to("/files/"), 303
+      redirect to("/files/", false), 303
     end
 
     get '/files/*' do |path|
@@ -79,7 +79,7 @@ module MagicShelf
 
       Resque.enqueue(MobiTask, taskparams)
       
-      <<-EOF
+      str = <<-EOF
       <!DOCTYPE html>
       <html lang="en">
       <head>
@@ -87,10 +87,11 @@ module MagicShelf
         <title></title>
       </head>
       <body>
-      Now generating mobi file. wait for a while. <br><a href="/">Back to Top</a>
+      Now generating mobi file. wait for a while. <br><a href="%s">Back to Top</a>
       </body>
       </html>
       EOF
+      str % [url("/", false)]
     end
 
     get '/generate_mobi*' do |f|
