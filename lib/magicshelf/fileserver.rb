@@ -7,6 +7,12 @@ require 'magicshelf/mobitask'
 
 module MagicShelf
   class FileServer < Sinatra::Application
+    helpers do
+      def relative_url(addr, add_script_name = true)
+        uri(addr, true, add_script_name)
+      end
+    end
+
     register Sinatra::ConfigFile
     configure :development do
       register Sinatra::Reloader
@@ -14,10 +20,11 @@ module MagicShelf
 
     set :root, File.join(File.dirname(__FILE__), '../..') #set :views, File.join(File.dirname(__FILE__), '../..', 'views')
     set :bind, '0.0.0.0'
+    set :absolute_redirects, false
     config_file 'server_config.yml'
 
     get '/' do
-      redirect to("/files/", false), 303
+      redirect relative_url("/files/"), 303
     end
 
     get '/files/*' do |path|
@@ -91,7 +98,7 @@ module MagicShelf
       </body>
       </html>
       EOF
-      str % [url("/", false)]
+      str % [relative_url("/")]
     end
 
     get '/generate_mobi*' do |f|
