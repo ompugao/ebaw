@@ -9,7 +9,7 @@ module MagicShelf
   class FileServer < Sinatra::Application
     helpers do
       def relative_url(addr, add_script_name = true)
-        uri(addr, true, add_script_name)
+        uri(addr, false, add_script_name)
       end
     end
 
