@@ -22,10 +22,23 @@ module MagicShelf
     def process()
       case @mimetype
       when "application/zip"
-        Zip::File.open(@inputfile) do |zip_file|
-          zip_file.each do |entry|
-            MagicShelf.logger.info("Extracting #{entry.name} ...")
-            entry.extract(File.join(@destdir,entry.name))
+        begin
+          Zip::File.open(@inputfile) do |zip_file|
+            zip_file.each do |entry|
+              MagicShelf.logger.info("Extracting #{entry.name} ...")
+              entry.extract(File.join(@destdir,entry.name))
+            end
+          end
+        rescue => e
+          MagicShelf.logger.warn("failed to extract zip file using rubyzip, delegate extraction to unzip command")
+          out, err, status = Open3.capture3("which unzip")
+          if status.exitstatus != 0
+            raise MagicShelf::FileExtractorError.new("cannot execute unzip, is it on your PATH?")
+          end
+          
+          out, err, status = Open3.capture3("unzip #{Shellwords.escape(@inputfile)} -d #{Shellwords.escape(@destdir)}")
+          if status.exitstatus != 0
+            raise MagicShelf::FileExtractorError.new("unzip exits with status #{status.exitstatus}: \n #{out} \n #{err}")
           end
         end
       when "application/x-rar"
