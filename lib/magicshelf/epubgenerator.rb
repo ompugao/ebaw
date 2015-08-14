@@ -71,7 +71,7 @@ module MagicShelf
         # to add nav file:
         #navpath = 'nav.xhtml'
         #book.add_item(navpath).add_content(File.open(navpath)).add_property('nav')
-        Naturally.sort(Dir.glob('**/*.{jpg,png}')).each_with_index do |filepath,index|
+        Naturally.sort(Dir.glob('**/*.{jpg,png,jpeg}',File::FNM_CASEFOLD)).each_with_index do |filepath,index|
           MagicShelf.logger.info("append image #{filepath}, index: #{index}")
           item = book.add_item(filepath)
           item.add_content(File.open(filepath)).toc_text(index.to_s)
