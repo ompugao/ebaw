@@ -64,6 +64,10 @@ module MagicShelf
         #nothing to do
       elsif @book_type == "ltr"
         book.page_progression_direction = 'ltr'
+        metadata = book.instance_eval{@package}.instance_eval{@metadata}
+        metafixedlayout = metadata.add_metadata('meta', '')
+        metafixedlayout['name'] = 'fixed-layout'
+        metafixedlayout['content'] = 'true'
       end
       
       # within ordered block, add_item will be added to spine.
