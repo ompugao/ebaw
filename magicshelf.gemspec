@@ -34,5 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency "rubyzip"
   spec.add_dependency "sinatra-contrib"
   spec.add_dependency "naturally", '~> 1.4.0'
-  spec.add_dependency "rmagick"
+  spec.add_dependency "mini_magick"
 end

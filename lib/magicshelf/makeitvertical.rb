@@ -1,5 +1,5 @@
 require 'magicshelf/exception'
-require 'rmagick'
+require 'mini_magick'
 
 module MagicShelf
   class MakeItVerticalError < Error; end
@@ -18,15 +18,16 @@ module MagicShelf
       @workdir ||= Dir.pwd
       Dir.glob(File.join(@workdir,'**/*')).select{|f|File.file?(f)}.each do |f|
         begin
-          img = Magick::Image.read(f).first
-        rescue Magick::ImageMagickError, RuntimeError => ex
+          img = MiniMagick::Image.open(f)
+        rescue MiniMagick::Error, RuntimeError => ex
           MagicShelf.logger.info("#{f} is not an image file. skipped.")
         end
         next if img.nil?
-        if img.columns > img.rows
-          img.rotate!(90)
+        if img.width > img.height
           newfile = File.join(File.dirname(f), File.basename(f,'.*') + '-rotate' + File.extname(f))
-          img.write(newfile)
+          img.combine_options do |b|
+            b.rotate(90)
+          end.write(newfile)
           MagicShelf.logger.info("#{f} is rotated and saved to #{newfile}.")
           if @erase_original
             FileUtils.remove(f) 
