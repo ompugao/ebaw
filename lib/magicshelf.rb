@@ -14,6 +14,7 @@ require "magicshelf/fileserver"
 require "magicshelf/kindlegenwrapper"
 require "magicshelf/kindlestripper"
 require "magicshelf/makeitvertical"
+require "magicshelf/shrinkit"
 require "magicshelf/tempdiropener"
 
 
