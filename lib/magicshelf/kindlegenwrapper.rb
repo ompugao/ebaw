@@ -5,7 +5,12 @@ module MagicShelf
   class KindleGenWrapperError < Error; end
 
   class KindleGenWrapper
-    attr_accessor :inputfile, :outputfile
+    attr_accessor :inputfile, :outputfile, :compression, :verbose
+
+    def initialize
+      @compression = "-c2"
+      @verbose = true
+    end
 
     def enter()
       MagicShelf.logger.debug('enter KindleGenWrapper')
@@ -22,7 +27,7 @@ module MagicShelf
     end
 
     def process()
-      out, err, status = Open3.capture3("kindlegen #{@inputfile} -o #{@outputfile}")
+      out, err, status = Open3.capture3("kindlegen #{@inputfile} #{@compression} #{"-verbose" if @verbose} -o #{@outputfile}")
       if status.exitstatus != 0
         raise MagicShelf::KindleGenWrapperError.new("kindlegen exited with #{status.exitstatus}: \n" + out + "\n" + err)
       end
