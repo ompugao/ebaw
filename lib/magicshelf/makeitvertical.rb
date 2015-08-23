@@ -19,7 +19,7 @@ module MagicShelf
       Dir.glob(File.join(@workdir,'**/*')).select{|f|File.file?(f)}.each do |f|
         begin
           img = MiniMagick::Image.open(f)
-        rescue MiniMagick::Error, RuntimeError => ex
+        rescue MiniMagick::Invalid, MiniMagick::Error, RuntimeError => ex
           MagicShelf.logger.info("#{f} is not an image file. skipped.")
         end
         next if img.nil?
