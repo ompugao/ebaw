@@ -19,7 +19,7 @@ module MagicShelf
         dirname = File.dirname(f)
         basename = File.basename(f,'.*')
         extname = File.extname(f)
-        newbasename = basename.gsub(/#/, '_').gsub(/\+/, '_')
+        newbasename = basename.gsub(/#/, '_').gsub(/\+/, '_').gsub(/%/, '_')
         if not (basename == newbasename)
           newfilename = File.join(dirname, newbasename + extname)
           FileUtils.mv(f, newfilename)
