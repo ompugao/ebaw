@@ -11,6 +11,16 @@ module MagicShelf
       def relative_url(addr, add_script_name = true)
         uri(addr, false, add_script_name)
       end
+
+      def to_pretty_filesize(i)
+        {
+          'B'  => 1024,
+          'KB' => 1024 * 1024,
+          'MB' => 1024 * 1024 * 1024,
+          'GB' => 1024 * 1024 * 1024 * 1024,
+          'TB' => 1024 * 1024 * 1024 * 1024 * 1024
+        }.each_pair { |e, s| return "#{(i.to_f / (s / 1024)).round(2)}#{e}" if i < s }
+      end
     end
 
     register Sinatra::ConfigFile
@@ -43,13 +53,15 @@ module MagicShelf
           files = files.sort_by{ |f| File.mtime(f) }.reverse
         else
         end
-        files_withmtime = files.map do |f|
+        files_info = files.map do |f|
           fname = (f.start_with?('./') ? f[2..-1] : f)
-          [fname, File.mtime(f).strftime("%Y/%m/%d %H:%M:%S")]
+          fsize = to_pretty_filesize(File.size(f))
+          ftime = File.mtime(f).strftime("%Y/%m/%d %H:%M:%S")
+          [fname, fsize, ftime]
         end
         upperpath = nil
         upperpath = path.split('/')[0...-1].join('/') if path != ""
-        erb :index, :locals => {:page_title => settings.page_title, :files_withmtime => files_withmtime, :path => path, :upperpath => upperpath, :sort_type => sort_type}
+        erb :index, :locals => {:page_title => settings.page_title, :files_info => files_info, :path => path, :upperpath => upperpath, :sort_type => sort_type}
       }
     end
 

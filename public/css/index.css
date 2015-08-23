@@ -16,10 +16,13 @@ table#file_list {
 }
 
 td#file {
-  width: 50%;
+  width: 40%;
 }
 td#buttons {
   width: 20%;
+}
+td#size {
+  width: 10%;
 }
 td#mtime {
   width: 30%;
